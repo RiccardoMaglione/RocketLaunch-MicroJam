@@ -13,9 +13,12 @@ public class MoveRocket : MonoBehaviour
 
     public GameObject Explosion;
 
+    public GameObject GameOverPanel;
+
     private void Start()
     {
         Explosion.SetActive(false);
+        BarSystem.ValueTotal = 0;
     }
 
     void Update()
@@ -30,9 +33,10 @@ public class MoveRocket : MonoBehaviour
         }
         if (rb.velocity.y < -0.1f && Meter != 0)
         {
-            PlayerPrefs.SetFloat("Meter", Meter);
+            PlayerPrefs.SetFloat("MeterInstance", Meter);
             Explosion.transform.position = transform.position;
             Explosion.SetActive(true);
+            GameOverPanel.SetActive(true);
             Destroy(this.gameObject);
         }
         
