@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class MoveRocket : MonoBehaviour
 {
     public Rigidbody2D rb;
-    static public bool CanImpulse;
+    static public bool CanImpulse;          //Booleano che indica se può muoversi
 
     public float Meter;
     public Text MeterText;
 
-    public GameObject Explosion;
+    public GameObject Explosion;            //Gameobject che indica la sprite dell'esplosione
 
-    public GameObject GameOverPanel;
+    public GameObject GameOverPanel;        //Gameobject che indica il pannello del gameover
 
     private void Start()
     {
@@ -23,6 +23,16 @@ public class MoveRocket : MonoBehaviour
 
     void Update()
     {
+        CalculateMeter();
+        GameOver();
+        RocketMove();
+    }
+
+    /// <summary>
+    /// Metodo che calcola l'altezza del razzo durante l'impulso
+    /// </summary>
+    public void CalculateMeter()
+    {
         if(Meter < transform.position.y)
         {
             Meter = transform.position.y;
@@ -31,6 +41,13 @@ public class MoveRocket : MonoBehaviour
                 MeterText.text = Meter.ToString("#.##") + "mt.";
             }
         }
+    }
+
+    /// <summary>
+    /// Metodo che viene richiamato quando ha finito l'impulso
+    /// </summary>
+    public void GameOver()
+    {
         if (rb.velocity.y < -0.1f && Meter != 0)
         {
             PlayerPrefs.SetFloat("MeterInstance", Meter);
@@ -39,7 +56,13 @@ public class MoveRocket : MonoBehaviour
             GameOverPanel.SetActive(true);
             Destroy(this.gameObject);
         }
-        
+    }
+
+    /// <summary>
+    /// Metodo che muove il razzo tramite un impulso
+    /// </summary>
+    public void RocketMove()
+    {
         if (CanImpulse == true)
         {
             rb.AddForce(Vector2.up * BarSystem.ValueTotal, ForceMode2D.Impulse);

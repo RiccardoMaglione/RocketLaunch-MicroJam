@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject CameraMain;
-    public GameObject Rocket;
+    public GameObject CameraMain;           //Indica la main camera
+    public GameObject Rocket;               //Indica il razzo
 
-    public Text MeterTextMenu;
-    public Text MeterInstanceTextMenu;
+    public Text MeterTextMenu;              //Testo per i metri record
+    public Text MeterInstanceTextMenu;      //Testo per i metri correnti dell'instanza
     private void Start()
     {
         MeterTextMenu.text = "Record: " + PlayerPrefs.GetFloat("Meter", 0).ToString() + "mt.";
@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if(CameraMain != null && Rocket != null)
-            CameraMain.transform.position = new Vector3(CameraMain.transform.position.x, Rocket.transform.position.y+1, CameraMain.transform.position.z);
+            CameraMain.transform.position = new Vector3(CameraMain.transform.position.x, Rocket.transform.position.y+1, CameraMain.transform.position.z);   //Uguaglia la posizione della camera ad una altezza +1 rispetto al razzo
 
 
-        if(PlayerPrefs.GetFloat("Meter", 0) < PlayerPrefs.GetFloat("MeterInstance", 0))
+        if(PlayerPrefs.GetFloat("Meter", 0) < PlayerPrefs.GetFloat("MeterInstance", 0))             //Se il record è minore dell'instanza corrente, sostituisce il valore del record, altrimenti tiene lo stesso 
         {
             PlayerPrefs.SetFloat("Meter", PlayerPrefs.GetFloat("MeterInstance"));
             if(MeterInstanceTextMenu != null)
