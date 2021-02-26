@@ -22,7 +22,9 @@ public class BarSystem : MonoBehaviour
     public float ValueYellow;
     public float ValueGreen;
 
-    public float ValueTotal;
+    static public float ValueTotal;
+
+    public bool CanEnter = true;
 
     void Start()
     {
@@ -96,6 +98,11 @@ public class BarSystem : MonoBehaviour
         if (Count < 5 && ActiveMove == true)
         {
             StartCoroutine(Cooldown());
+        }
+        else if (Count >= 5 && CanEnter == true)
+        {
+            MoveRocket.CanImpulse = true;
+            CanEnter = false;
         }
     }
     public IEnumerator Cooldown()
