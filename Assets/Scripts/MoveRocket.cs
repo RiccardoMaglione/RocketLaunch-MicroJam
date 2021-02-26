@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MoveRocket : MonoBehaviour
 {
+    #region Variables
     public Rigidbody2D rb;
     static public bool CanImpulse;          //Booleano che indica se può muoversi
 
@@ -14,6 +15,7 @@ public class MoveRocket : MonoBehaviour
     public GameObject Explosion;            //Gameobject che indica la sprite dell'esplosione
 
     public GameObject GameOverPanel;        //Gameobject che indica il pannello del gameover
+    #endregion
 
     private void Start()
     {
